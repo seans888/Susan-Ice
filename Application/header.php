@@ -1,72 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
+ <?php
 
-        <title>Susan Ice Store</title>
-        <link href="images/icon.png" rel="icon" type="image">
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css" media="screen">
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="screen">
-        <link rel="stylesheet" type="text/css" href="css/DT_bootstrap.css">
-        <?php include('connect.php'); ?>
-    </head>
-    <script src="js/jquery.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
+/*
+UserCake Version: 2.0.2
+http://usercake.com
+*/
+echo "
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>".$websiteName."</title>
+<link rel='stylesheet' href='". $font ."'>
+<script src='models/funcs.js' type='text/javascript'></script>
+<script src='".$externalJs."' type='text/javascript'></script>
+<link rel='stylesheet' href='".$icons."'>
+<link rel='stylesheet' href='".$externalCss."'>
+<link href='".$template."' rel='stylesheet' type='text/css' />
 
-    <script type="text/javascript" charset="utf-8" language="javascript" src="js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf-8" language="javascript" src="js/DT_bootstrap.js"></script>
-    <script type='text/javascript' language='javascript' src='js/ndhui.js'></script>
+";
 
-
-
-    <link rel="stylesheet" href="themes/default/default.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="themes/light/light.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="themes/dark/dark.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="themes/bar/bar.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="css/nivo-slider.css" type="text/css" media="screen" /> 
-
-    <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-            $(window).load(function() {
-                $('#slider').nivoSlider();
-            });
-        });
-    </script>  
+// echo "
+// <link rel='stylesheet' href='app/css/lib/getmdl-select.min.css'>
+// <link rel='stylesheet' href='app/css/lib/nv.d3.css'>
+// <link rel='stylesheet' href='app/css/application.css'>
+// </head>
+// <body>
+// ";
 
 
-    <script type="application/javascript" src="js/awesomechart.js"> </script>
+ echo '
+ <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+         <div class="mdl-layout__header-row">
+            <div class="mdl-layout-spacer"></div>
+            <!-- Title -->
+
+            ';  
 
 
-    <script language="javascript" type="text/javascript">
-        /* Visit http://www.yaldex.com/ for full source code
-and get more free JavaScript, CSS and DHTML scripts! */
-        <!-- Begin
-        var timerID = null;
-        var timerRunning = false;
-        function stopclock (){
-            if(timerRunning)
-                clearTimeout(timerID);
-            timerRunning = false;
-        }
-        function showtime () {
-            var now = new Date();
-            var hours = now.getHours();
-            var minutes = now.getMinutes();
-            var seconds = now.getSeconds()
-            var timeValue = "" + ((hours >12) ? hours -12 :hours)
-            if (timeValue == "0") timeValue = 12;
-            timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-            timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-            timeValue += (hours >= 12) ? " P.M." : " A.M."
-            document.clock.face.value = timeValue;
-            timerID = setTimeout("showtime()",1000);
-            timerRunning = true;
-        }
-        function startclock() {
-            stopclock();
-            showtime();
-        }
-        window.onload=startclock;
-        // End -->
-    </SCRIPT>	
+
+ echo 
+ '
+   <!-- Add spacer, to align navigation to the right -->
+   <div class="mdl-layout-spacer"></div>
+   <!-- Navigation -->
+      <nav class="mdl-navigation">
+      </nav>
+   </div>
+      </header>
+      <div class="mdl-layout__drawer">
+         <span class="mdl-layout-title">Learn</span>
+         <nav class="mdl-navigation">';
+
+
+if (!securePage($_SERVER['PHP_SELF'])){die();}
+
+//Links for logged in user
+if(isUserLoggedIn()) {
+   echo "
+   <a class='mdl-navigation__link' href='orderCreate.php' style='color:gray'>Order Now</a>
+   <a class='mdl-navigation__link' href='orderList.php' style='color:gray'>Order list</a>  
+   <a class='mdl-navigation__link' href='user_settings.php' style='color:gray'>User Settings</a>   
+   <a class='mdl-navigation__link' href='logout.php' style='color:gray'>Logout</a>
+   ";
+   
+   //Links for permission level 2 (default admin)
+   if ($loggedInUser->checkPermission(array(2))){
+   echo "
+   <a class='mdl-navigation__link' href='supplierAdd.php' style='color:gray'>Add Supplier</a>
+   <a class='mdl-navigation__link' href='productCreate.php' style='color:gray'>Create Product</a>
+   <a class='mdl-navigation__link' href='admin_configuration.php' style='color:gray'>Admin Configuration</a>
+   <a class='mdl-navigation__link' href='admin_users.php' style='color:gray'>Admin Users</a>
+   <a class='mdl-navigation__link' href='admin_permissions.php' style='color:gray'>Admin Permissions</a>
+   <a class='mdl-navigation__link' href='admin_pages.php' style='color:gray'>Admin Pages</a>
+   
+   ";
+   }
+} 
+//Links for users not logged in
+else {
+   echo "
+   <a class='mdl-navigation__link' href='index.php' style='color:gray'>Home</a>
+   <a class='mdl-navigation__link' href='login.php' style='color:gray'>Login</a>
+   <a class='mdl-navigation__link' href='register.php' style='color:gray'>Register</a>
+   <a class='mdl-navigation__link' href='forgot-password.php' style='color:gray'>Forgot Password</a>";
+   if ($emailActivation)
+   {
+   echo "<a class='mdl-navigation__link' href='resend-activation.php' style='color:gray'>Resend Activation Email</a>";
+   }
+}
+
+ echo        '</nav>
+      </div>
+
+   <div class = "main-content">
+   ';
+
+   ?>
