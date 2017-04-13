@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 12, 2017 at 05:07 PM
+-- Host: localhost
+-- Generation Time: Feb 21, 2017 at 12:33 PM
 -- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.20
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,16 +35,6 @@ CREATE TABLE `uc_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `uc_address`
---
-
-INSERT INTO `uc_address` (`id_address`, `address`, `city`, `region`, `postalcode`) VALUES
-(1, 'something', 'manila', 'Metromanila', '1111'),
-(10, '101 building', 'BGC', 'NCR', '111'),
-(11, 'p25-16 villamor pasay', 'pasay city', '12223', '23322'),
-(12, 'sa bahay ko', 'new york', '', '0');
-
---
 -- Indexes for dumped tables
 --
 
@@ -62,7 +52,7 @@ ALTER TABLE `uc_address`
 -- AUTO_INCREMENT for table `uc_address`
 --
 ALTER TABLE `uc_address`
-  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
