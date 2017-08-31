@@ -1,22 +1,15 @@
 <?php
 	require_once('../auth.php');
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+$transnum=$_SESSION['SESS_MEMBER_ID'];
+?>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Dashboard | Modern Admin</title>
-<link rel="stylesheet" type="text/css" href="css/960.css" />
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
-<link rel="stylesheet" type="text/css" href="css/text.css" />
-<link rel="stylesheet" type="text/css" href="css/blue.css" />
-<link type="text/css" href="css/smoothness/ui.css" rel="stylesheet" />  
-<link rel="stylesheet" href="febe/style.css" type="text/css" media="screen" charset="utf-8">
-<script src="argiepolicarpio.js" type="text/javascript" charset="utf-8"></script>
-<script src="js/application.js" type="text/javascript" charset="utf-8"></script>	
+<link rel="stylesheet" href="main.css" type="text/css" media="screen" charset="utf-8">
 <!--sa poip up-->
 <link href="src/facebox.css" media="screen" rel="stylesheet" type="text/css" />
-   <script src="lib/jquery.js" type="text/javascript"></script>
+<script src="lib/jquery.js" type="text/javascript"></script>
   <script src="src/facebox.js" type="text/javascript"></script>
   <script type="text/javascript">
     jQuery(document).ready(function($) {
@@ -26,143 +19,209 @@
       })
     })
   </script>
-</head>
+  <style>
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
-<body>
-<!-- WRAPPER START -->
-<div class="container_16" id="wrapper">	
-<!-- HIDDEN COLOR CHANGER -->      
-      <div style="position:relative;">
-  	<!--LOGO-->
-	<div class="grid_8" id="logo">Susan Ice Store</div>
-    <div class="grid_8">
-<!-- USER TOOLS START -->
-      <div id="user_tools"><span><a href="../index.php">Logout</a></span></div>
-    </div>
-<!-- USER TOOLS END -->    
-<div class="grid_16" id="header">
-<!-- MENU START -->
-<div id="menu">
-	<ul class="group" id="menu_group_main">
-		<li class="item first" id="one"><a href="index.php" class="main current"><span class="outer"><span class="inner dashboard">Dashboard</span></span></a></li>
-		<li class="item middle" id="four"><a href="message.php" class="main"><span class="outer"><span class="inner media_library">Messages</span></span></a></li>  
-		<li class="item last" id="eight"><a href="products.php" class="main"><span class="outer"><span class="inner settings">Products</span></span></a></li>        
-    </ul>
-</div>
-<!-- MENU END -->
-</div>
-
-
-<!-- CONTENT START -->
-    <div class="grid_16" id="content">
-    <!--  TITLE START  --> 
-    <div class="grid_9">
-    <h1 class="dashboard">Dashboard</h1>
-    </div>
-    <div class="clear">
-    </div>
-    <!--  TITLE END  -->    
-    <!-- #PORTLETS START -->
-    <div id="portlets">
-    
-	<!--  SECOND SORTABLE COLUMN END -->
-    <div class="clear"></div>
-    <!--THIS IS A WIDE PORTLET-->
-		<div class="portlet">
-			<div class="portlet-header fixed"><img src="images/icons/user.gif" width="16" height="16" alt="Latest Registered Users" /> 
-			<label for="filter">Search</label> <input type="text" name="filter" value="" id="filter" />
-			&nbsp;&nbsp;Legend:  <img src="cancel.png">Pending &nbsp;<img src="active.png">Delivered
-			</div>
-			<div class="portlet-content nopadding">
-			<form action="" method="post">
+  </style>
+  <script language="javascript" type="text/javascript">
+// Roshan's Ajax dropdown code with php
+// This notice must stay intact for legal use
+// Copyright reserved to Roshan Bhattarai - nepaliboy007@yahoo.com
+// If you have any problem contact me at http://roshanbh.com.np
+function getXMLHTTP() { //fuction to return the xml http object
+		var xmlhttp=false;	
+		try{
+			xmlhttp=new XMLHttpRequest();
+		}
+		catch(e)	{		
+			try{			
+				xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e){
+				try{
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+				}
+				catch(e1){
+					xmlhttp=false;
+				}
+			}
+		}
+		 	
+		return xmlhttp;
+    }
+	
+	function getState(countryId) {		
+		
+		var strURL="findState.php?country="+countryId;
+		var req = getXMLHTTP();
+		
+		if (req) {
 			
-			<table cellpadding="1" cellspacing="1" id="resultTable">
-				<thead>
-					<tr>
-						<th  style="border-left: 1px solid #C1DAD7"> Confirmation Number </th>
-						<th> Name </th>
-						<th> Address </th>
-						<th> Contact </th>
-						<th> Email </th>
-						<th> Delivery Address </th>
-						<th> Status </th>
-						<th> Delivery Type</th>
-						<th> Payment Method</th>
-						<th> Action </th>
-					</tr>
-				</thead>
-				<tbody>
-				<?php
-					include('../store/connect.php');
-					$result = mysql_query("SELECT * FROM reservation ORDER BY firstname ASC");
-					while($row = mysql_fetch_array($result))
-						{
-							echo '<tr class="record" id="'.$row['status'].'">';
-							echo '<td style="border-left: 1px solid #C1DAD7;">'.$row['confirmation'].'</td>';
-							echo '<td>'.$row['firstname'].' '.$row['lastname'].'</td>';
-							echo '<td><div align="left">'.$row['address'].'</div></td>';
-							echo '<td><div align="left">'.$row['contact'].'</div></td>';
-							echo '<td><div align="left">'.$row['email'].'</div></td>';
-							echo '<td><div align="left">'.$row['delivery'].'</div></td>';
-							echo '<td><div align="left">'.$row['status'].'</div></td>';
-							echo '<td><div align="left">'.$row['delivery_type'].'</div></td>';
-							echo '<td><div align="left">'.$row['payment'].'</div></td>';
-							echo '<td><div align="center"><a rel="facebox" href="vieworders.php?id='.$row['confirmation'].'" title="Click To View Orders">View Orders</a> | <a rel="facebox" href="viewreport.php?id='.$row['confirmation'].'" title="Click To View Orders">Print</a> | <a rel="facebox" href="editstatus.php?id='.$row['reservation_id'].'">edit</a> | <a href="#" id="'.$row['reservation_id'].'" class="delbutton" title="Click To Delete">delete</a></div></td>';
-							echo '</tr>';
-						}
-					?> 
-				</tbody>
-			</table>
-			</form>
-			</div>
-		</div>
-<!--  END #PORTLETS -->  
-   </div>
-    <div class="clear"> </div>
-<!-- END CONTENT-->    
-  </div>
-<div class="clear"> </div>
-
-</div>
-</div>
-<!-- WRAPPER END -->
-
-<script src="js/jquery.js"></script>
-  <script type="text/javascript">
-$(function() {
-
-
-$(".delbutton").click(function(){
-
-//Save the link in a variable called element
-var element = $(this);
-
-//Find the id of the link that was clicked
-var del_id = element.attr("id");
-
-//Built a url to send
-var info = 'id=' + del_id;
- if(confirm("Sure you want to delete this update? There is NO undo!"))
-		  {
-
- $.ajax({
-   type: "GET",
-   url: "deleteres.php",
-   data: info,
-   success: function(){
-   
-   }
- });
-         $(this).parents(".record").animate({ backgroundColor: "#fbc7c7" }, "fast")
-		.animate({ opacity: "hide" }, "slow");
-
- }
-
-return false;
-
-});
-
-});
+			req.onreadystatechange = function() {
+				if (req.readyState == 4) {
+					// only if "OK"
+					if (req.status == 200) {						
+						document.getElementById('statediv').innerHTML=req.responseText;						
+					} else {
+						alert("There was a problem while using XMLHTTP:\n" + req.statusText);
+					}
+				}				
+			}			
+			req.open("GET", strURL, true);
+			req.send(null);
+		}		
+	}
+	function getCity(countryId,stateId) {		
+		var strURL="findCity.php?country="+countryId+"&state="+stateId;
+		var req = getXMLHTTP();
+		
+		if (req) {
+			
+			req.onreadystatechange = function() {
+				if (req.readyState == 4) {
+					// only if "OK"
+					if (req.status == 200) {						
+						document.getElementById('citydiv').innerHTML=req.responseText;						
+					} else {
+						alert("There was a problem while using XMLHTTP:\n" + req.statusText);
+					}
+				}				
+			}			
+			req.open("GET", strURL, true);
+			req.send(null);
+		}
+				
+	}
 </script>
+<style>
+a{
+color:#fff;
+text-decoration:none;
+}
+    a.tooltip {outline:none; }
+a.tooltip strong {line-height:30px;}
+a.tooltip:hover {text-decoration:none;} 
+a.tooltip span {
+    z-index:10;display:none; padding:14px 20px;
+    margin-top:-30px; margin-left:28px;
+    width:240px; line-height:16px;
+}
+a.tooltip:hover span{
+    display:inline; position:absolute; color:#111;
+    border:1px solid #DCA; background:#fffAF0;}
+.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+    
+/*CSS3 extras*/
+a.tooltip span
+{
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+        
+    -moz-box-shadow: 5px 5px 8px #CCC;
+    -webkit-box-shadow: 5px 5px 8px #CCC;
+    box-shadow: 5px 5px 8px #CCC;
+}
+</style>
+<script type="text/javascript">
+function validateForm()
+{
+var x=document.forms["form1"]["total"].value;
+if (x==null || x=="")
+  {
+  alert("Take Your Order first");
+  return false;
+  }
+var con = confirm("Are You Sure? you want to order this product?");
+if (con ==false)
+{
+return false;
+}
+}
+</script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="note">
+		<h1 style="margin-top: 0px; margin-bottom: 5px;">Select Product</h1>
+		For inquiries and order cancelation please contacts: (1800)777-111 or email us susana_potian@yahoo.com.ph and call on (+6343)3005704.
+	</div>
+	<div id="content">
+		<div id="productlist">
+			
+			<?php
+			require "connect.php";
+			$result = mysql_query("SELECT * FROM internet_shop");
+			while($row=mysql_fetch_assoc($result))
+			{
+				echo '<a rel="facebox" href="orderpage.php?id='.$row['id'].'&trnasnum='.$transnum.'"><img src="img/products/'.$row['img'].'" alt="'.htmlspecialchars($row['name']).'" width="109" height="109" class="pngfix" /></a>';
+			}
+
+			?>
+		</div>
+		<div id="orderlist">
+			<table width="100%" border="1" cellpadding="2" cellspacing="2">
+				<tr>
+				  <td></td>
+				  <td width="25"><div align="center"><strong>Qty</strong></div></td>
+				  <td width="150"><div align="left"><strong>Name</strong></div></td>
+				  <td width="25"><div align="center"><strong>Total</strong></div></td>
+				</tr>
+				<?php
+				$result3 = mysql_query("SELECT * FROM orders WHERE confirmation='$transnum'");
+					while($row3 = mysql_fetch_array($result3))
+						{
+						echo '<tr>';
+						echo '<td><a href="deleteorder.php?id='.$row3['id'].'" id="'.$row3['id'].'" class="delbutton" title="Click To Delete"><img src="img/delete.png"></a></td>';
+						echo '<td><div align="center">'.$row3['qty'].'</div></td>';
+						echo '<td>'.$row3['product'].'</td>';
+						echo '<td><div align="center">'.$row3['total'].'</div></td>';
+						echo '</tr>';
+						}
+				?>
+				<tr>
+				  <td colspan="3"><div align="right"><span style="color:#B80000; font-size:13px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;">Grand Total: </span></div></td>
+				  <td><div align="center">
+				  <?php
+				  $result5 = mysql_query("SELECT sum(total) FROM orders WHERE confirmation='$transnum'");
+					while($row5 = mysql_fetch_array($result5))
+					  { 
+						echo $row5['sum(total)']; 
+						$sfdddsdsd=$row5['sum(total)'];
+					  }
+				  ?>
+				  
+				  
+				  </div>
+				  </td>
+				</tr>
+			</table>
+			<form method="post" action="personalinfo.php" name="form1" onsubmit="return validateForm()">
+			<input type="hidden" name="transnumber" value="<?php echo $transnum ?>" />
+			<input type="hidden" name="total" value="<?php echo $sfdddsdsd ?>" />
+			<input type="hidden" name="totalqty" value="
+			<?php
+				  $result5 = mysql_query("SELECT sum(qty) FROM orders WHERE confirmation='$transnum'");
+					while($row5 = mysql_fetch_array($result5))
+					  { 
+						echo $row5['sum(qty)']; 
+					  }
+				  ?>
+			" />
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+			<input type="submit" value="Check Out">
+			</form>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div style="text-align:center; margin-top:10px;">
+	
+	</div>
+	<div class="clearfix"></div>
+</div>
 </body>
 </html>
