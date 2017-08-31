@@ -2,10 +2,10 @@
 	//Start session
 	session_start();
 	
-
+	//Connect to mysql server
 	require "store/connect.php";
 	
-
+	//Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
 		if(get_magic_quotes_gpc()) {
@@ -14,7 +14,7 @@
 		return mysql_real_escape_string($str);
 	}
 	
-
+	//Sanitize the POST values
 	$login = clean($_POST['user']);
 	$password = clean($_POST['password']);
 	
@@ -25,7 +25,7 @@
 //  {
 //  $level=$row['position'];
 //  }
-
+	//Check whether the query was successful or not
 	if($result) {
 		if(mysql_num_rows($result) > 0) {
 			//Login Successful

@@ -1,227 +1,200 @@
-<?php
-	require_once('../auth.php');
-?>
-<?php
-$transnum=$_SESSION['SESS_MEMBER_ID'];
-?>
-<html>
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
 <head>
-<link rel="stylesheet" href="main.css" type="text/css" media="screen" charset="utf-8">
-<!--sa poip up-->
-<link href="src/facebox.css" media="screen" rel="stylesheet" type="text/css" />
-<script src="lib/jquery.js" type="text/javascript"></script>
-  <script src="src/facebox.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    jQuery(document).ready(function($) {
-      $('a[rel*=facebox]').facebox({
-        loadingImage : 'src/loading.gif',
-        closeImage   : 'src/closelabel.png'
-      })
-    })
-  </script>
-  <style>
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width" />
+<title>Susan Ice Store</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/jqueryslidemenu.css" type="text/css" media="screen" />
 
-  </style>
-  <script language="javascript" type="text/javascript">
-// Roshan's Ajax dropdown code with php
-// This notice must stay intact for legal use
-// Copyright reserved to Roshan Bhattarai - nepaliboy007@yahoo.com
-// If you have any problem contact me at http://roshanbh.com.np
-function getXMLHTTP() { //fuction to return the xml http object
-		var xmlhttp=false;	
-		try{
-			xmlhttp=new XMLHttpRequest();
-		}
-		catch(e)	{		
-			try{			
-				xmlhttp= new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			catch(e){
-				try{
-				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-				}
-				catch(e1){
-					xmlhttp=false;
-				}
-			}
-		}
-		 	
-		return xmlhttp;
-    }
-	
-	function getState(countryId) {		
-		
-		var strURL="findState.php?country="+countryId;
-		var req = getXMLHTTP();
-		
-		if (req) {
-			
-			req.onreadystatechange = function() {
-				if (req.readyState == 4) {
-					// only if "OK"
-					if (req.status == 200) {						
-						document.getElementById('statediv').innerHTML=req.responseText;						
-					} else {
-						alert("There was a problem while using XMLHTTP:\n" + req.statusText);
-					}
-				}				
-			}			
-			req.open("GET", strURL, true);
-			req.send(null);
-		}		
-	}
-	function getCity(countryId,stateId) {		
-		var strURL="findCity.php?country="+countryId+"&state="+stateId;
-		var req = getXMLHTTP();
-		
-		if (req) {
-			
-			req.onreadystatechange = function() {
-				if (req.readyState == 4) {
-					// only if "OK"
-					if (req.status == 200) {						
-						document.getElementById('citydiv').innerHTML=req.responseText;						
-					} else {
-						alert("There was a problem while using XMLHTTP:\n" + req.statusText);
-					}
-				}				
-			}			
-			req.open("GET", strURL, true);
-			req.send(null);
-		}
-				
-	}
-</script>
-<style>
-a{
-color:#fff;
-text-decoration:none;
-}
-    a.tooltip {outline:none; }
-a.tooltip strong {line-height:30px;}
-a.tooltip:hover {text-decoration:none;} 
-a.tooltip span {
-    z-index:10;display:none; padding:14px 20px;
-    margin-top:-30px; margin-left:28px;
-    width:240px; line-height:16px;
-}
-a.tooltip:hover span{
-    display:inline; position:absolute; color:#111;
-    border:1px solid #DCA; background:#fffAF0;}
-.callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
-    
-/*CSS3 extras*/
-a.tooltip span
-{
-    border-radius:4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-        
-    -moz-box-shadow: 5px 5px 8px #CCC;
-    -webkit-box-shadow: 5px 5px 8px #CCC;
-    box-shadow: 5px 5px 8px #CCC;
-}
-</style>
-<script type="text/javascript">
-function validateForm()
-{
-var x=document.forms["form1"]["total"].value;
-if (x==null || x=="")
-  {
-  alert("Take Your Order first");
-  return false;
-  }
-var con = confirm("Are You Sure? you want to order this product?");
-if (con ==false)
-{
-return false;
-}
-}
-</script>
+<!-- supersized -->
+<link rel="stylesheet" href="css/supersized.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/supersized.shutter.css" type="text/css" media="screen" />
+<!-- supersized -->
+
+<link rel="stylesheet" href="css/carouFredSel.css" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="css/quicksand.css" />
+<link rel="stylesheet" type="text/css" href="js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jqueryslidemenu.js"></script>
+<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+
+<!-- supersized -->
+<script type="text/javascript" src="js/supersized.3.2.7.js"></script>
+<script type="text/javascript" src="js/supersized.shutter.js"></script>
+<!-- supersized -->
+
+<!-- fancybox -->
+<script type="text/javascript" src="js/fancybox/jquery.fancybox-1.3.4.js"></script>
+<script type="text/javascript" src="js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<!-- fancybox -->
+
+<!-- quicksand -->
+<script type="text/javascript" src="js/portfolio_sortable.js"></script>
+<script type="text/javascript" src="js/quicksand.js"></script>
+<!-- quicksand -->
+
+<script type="text/javascript" src="js/jquery.carouFredSel-6.0.6.js"></script>
+
+<script type="text/javascript" src="js/contact.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+            
+<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+
 </head>
 <body>
-<div id="wrapper">
-	<div id="note">
-		<h1 style="margin-top: 0px; margin-bottom: 5px;">Select Product</h1>
-		For inquiries and order cancelation please contacts: (1800)777-111 or email us susana_potian@yahoo.com.ph and call on (+6343)3005704.
-	</div>
-	<div id="content">
-		<div id="productlist">
-			
-			<?php
-			require "connect.php";
-			$result = mysql_query("SELECT * FROM internet_shop");
-			while($row=mysql_fetch_assoc($result))
-			{
-				echo '<a rel="facebox" href="orderpage.php?id='.$row['id'].'&trnasnum='.$transnum.'"><img src="img/products/'.$row['img'].'" alt="'.htmlspecialchars($row['name']).'" width="109" height="109" class="pngfix" /></a>';
-			}
+<div id="page_wrapper">
+<div id="dvLoading"></div>
+<div id="bgOverlay"><a  href="#" class="page_close"><img src="images/close_button.png" alt="img" /></a></div>
 
-			?>
-		</div>
-		<div id="orderlist">
-			<table width="100%" border="1" cellpadding="2" cellspacing="2">
-				<tr>
-				  <td></td>
-				  <td width="25"><div align="center"><strong>Qty</strong></div></td>
-				  <td width="150"><div align="left"><strong>Name</strong></div></td>
-				  <td width="25"><div align="center"><strong>Total</strong></div></td>
-				</tr>
-				<?php
-				$result3 = mysql_query("SELECT * FROM orders WHERE confirmation='$transnum'");
-					while($row3 = mysql_fetch_array($result3))
-						{
-						echo '<tr>';
-						echo '<td><a href="deleteorder.php?id='.$row3['id'].'" id="'.$row3['id'].'" class="delbutton" title="Click To Delete"><img src="img/delete.png"></a></td>';
-						echo '<td><div align="center">'.$row3['qty'].'</div></td>';
-						echo '<td>'.$row3['product'].'</td>';
-						echo '<td><div align="center">'.$row3['total'].'</div></td>';
-						echo '</tr>';
-						}
-				?>
-				<tr>
-				  <td colspan="3"><div align="right"><span style="color:#B80000; font-size:13px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;">Grand Total: </span></div></td>
-				  <td><div align="center">
-				  <?php
-				  $result5 = mysql_query("SELECT sum(total) FROM orders WHERE confirmation='$transnum'");
-					while($row5 = mysql_fetch_array($result5))
-					  { 
-						echo $row5['sum(total)']; 
-						$sfdddsdsd=$row5['sum(total)'];
-					  }
-				  ?>
-				  
-				  
-				  </div>
-				  </td>
-				</tr>
-			</table>
-			<form method="post" action="personalinfo.php" name="form1" onsubmit="return validateForm()">
-			<input type="hidden" name="transnumber" value="<?php echo $transnum ?>" />
-			<input type="hidden" name="total" value="<?php echo $sfdddsdsd ?>" />
-			<input type="hidden" name="totalqty" value="
-			<?php
-				  $result5 = mysql_query("SELECT sum(qty) FROM orders WHERE confirmation='$transnum'");
-					while($row5 = mysql_fetch_array($result5))
-					  { 
-						echo $row5['sum(qty)']; 
-					  }
-				  ?>
-			" />
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 
-			<input type="submit" value="Check Out">
-			</form>
-		</div>
-		<div class="clearfix"></div>
-	</div>
-	<div style="text-align:center; margin-top:10px;">
-	
-	</div>
-	<div class="clearfix"></div>
+
+<!--leftSide start --> 
+<div id="leftSide">
+    <div id="logo">
+        <h1>
+            <a href="index.php">
+                <img src="images/susanlogo.png" alt="logo" width="215" height="120" />
+            </a>
+        </h1>
+    </div>
+	<ul>
+			<li style="border-bottom: 1px solid rgba(127, 127, 127, 0.3); position: relative;"><a href="store/generatetrans.php" style="color: #211C1B; display: block; font-family: 'Oswald',Arial; font-weight: 600; padding: 10px 25px; text-decoration: none; text-transform: uppercase; font-size:15px;">products</a></li>
+		</ul>
+    <nav id="sidebarmenu">
+        <ul id="sidebarmenu1" class="menu">
+            <li><a href="#page_about">about</a></li>
+            <li><a href="#page_contact">FEEDBACK</a></li>
+			<li><a href="#adminlogin">Login</a></li>
+        </ul>
+		
+    </nav>
+    
+    <div class="social_media_wrapper"> 
+      <div class="social_media"> 
+            <ul>
+                <li></li>
+                
+            </ul>
+        </div>
+    </div>
 </div>
+<!--leftside end --> 
+
+
+<!--Content Start-->
+<div class="contWrapper">
+<article id="content">
+
+
+
+<ul id="ulcontent">
+
+<!--About Us Start-->
+<li id="page_about">
+    <div class="title-wrapper">
+       
+    </div>
+    
+    <div class="v_space"></div>
+    
+    <div class="title-wrapper">
+        <h2>Mission and Vision</h2>
+    </div>
+    <div class="two_third" style="width:48%;">
+        <h3>Mission</h3>
+            <p>To serve the customer needs of the general public and produce outputs that meet their expectation with higher standard of quality and services. </p>
+    </div>
+    <div class="one_third_last" style="width:48%;">
+        <h3>Vision</h3>
+         <p>
+			To be amongst the leading business ventures in supplying of different kinds of ice in the villamor and to become a focal point of other barangays and restaurants. </p>
+		</p>
+    </div>
+   <img src="images/pasay area.png">
+	<center> <p> <h3>  Villamor Airbase Pasay City </h3> </p> </center>
+    <div class="clear"></div>
+</li>
+<!--About Us End-->
+
+<!--Contact Start-->
+<li id="page_contact">
+    
+    <div class="clear"></div>
+    <div class="v_space"></div>
+    
+    <div class="title-wrapper">
+        <h2>Feedback Form</h2>
+    </div>
+    <div class="contact_form">
+        <form method="post" action="sendEmail.php" name="contact-form" id="contact-form">	
+		<div id="response"></div>
+        <div id="main">
+            <div class="one_third">
+                <label>Name:</label>
+                <p><input type="text" name="name" id="name" size="30" /></p>
+            </div>
+            <div class="one_third">
+                <label>Email:</label>
+                <p><input type="text" name="email" id="email" size="30" /></p>
+            </div>
+            <div class="one_third_last">
+                <label>Subject:</label>
+                <p><input type="text" name="subject" id="subject" size="30" /></p>
+            </div>
+            <label>Message:</label>
+            <p><textarea name="message" id="message" cols="30" rows="10"></textarea></p>
+            <p><input  class="contact_button button" type="submit" name="submit" id="submit" value="Send" /></p>
+        </div>
+        </form>
+    </div> 
+</li>
+<!--Contact End-->
+
+<!--adminlogin Start-->
+<li id="adminlogin">
+   
+    <div class="title-wrapper">
+        <h2>Admin Login Form</h2>
+    </div>
+    <div class="contact_form">
+        <form method="post" action="login.php" name="contact-form" id="contact-form">	
+        <div id="main">
+            <div class="one_third">
+                <label>Username:</label>
+                <p><input type="text" name="user" id="name" size="30" /></p>
+            </div>
+            <div class="one_third">
+                <label>Password:</label>
+                <p><input type="password" name="password" id="email" size="30" /></p>
+            </div>
+            <div class="one_third_last">
+			<label>&nbsp;</label>
+                <input  class="contact_button button" type="submit" name="submit" id="submit" value="Login" />
+            </div>
+        </div>
+        </form>
+    </div> 
+</li>
+<!--adminlogin End-->
+                   
+</ul>
+</article>
+</div>
+<!--Content End-->
+
+</div>
+<!--Page wrapper End-->
 </body>
 </html>
